@@ -1,5 +1,5 @@
 package ui;
 
-public class uiheadphones {
+public class UIHeadphones {
     
 }

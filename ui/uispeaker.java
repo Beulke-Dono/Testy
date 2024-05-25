@@ -1,5 +1,5 @@
 package ui;
 
-public class uispeaker {
+public class UISpeaker {
     
 }
