@@ -1,37 +1,46 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import tests.KeyboardTest;
 
-public class UIKeyboard {
+public class UIKeyboard extends JFrame {
+    private JList<String> keyList;
+    private DefaultListModel<String> listModel;
+
+    public UIKeyboard() {
+        super("Key Press Tracker");
+
+        listModel = new DefaultListModel<>();
+        keyList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(keyList);
+
+        add(scrollPane);
+
+        // Cria um painel de informações usando UIUtils
+        JPanel infoPanel = UIUtils.createInfoPanel();
+        JLabel infoLabel = UIUtils.createInfoLabel("Pressione uma tecla para começar.");
+        infoPanel.add(infoLabel);
+        add(infoPanel, BorderLayout.WEST);
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fechar apenas a janela do teclado
+        setSize(700, 500);
+        setLocationRelativeTo(null); // Centraliza a janela na tela
+    }
+
+    public void setKeyListener(KeyListener listener) {
+        keyList.addKeyListener(listener);
+    }
+
     public void showUI() {
-        JFrame frame = new JFrame("Teste de Teclado");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setLayout(new BorderLayout());
+        setVisible(true);
+    }
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        JLabel instructionLabel = new JLabel("Pressione as teclas para testá-las:");
-        instructionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        instructionLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        panel.add(instructionLabel, BorderLayout.NORTH);
-
-        JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
-        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        textArea.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                char keyChar = evt.getKeyChar();
-                textArea.append("Tecla pressionada: " + keyChar + " (Código: " + evt.getKeyCode() + ")\n");
-            }
-        });
-
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setVisible(true);
+    // Método para adicionar teclas pressionadas ao modelo da lista
+    public void addKeyPressed(String keyText) {
+        listModel.addElement(keyText);
     }
 }

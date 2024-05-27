@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import hardware.SystemInfo;
 import ui.UIUtils;
-import ui.UIKeyboard; // Importar a interface de teste de teclado
-
+import ui.UIKeyboard;
+import ui.UIMouse;
 public class Main {
     public static void main(String[] args) {
         // Configuração da Janela Principal
@@ -96,11 +96,10 @@ public class Main {
                 UIKeyboard keyboardTest = new UIKeyboard();
                 keyboardTest.showUI();
                 break;
-            // Adicionar casos para outros testes conforme necessário
-            // case "MOUSE":
-            //     UIMouse mouseTest = new UIMouse();
-            //     mouseTest.showUI();
-            //     break;
+            case "MOUSE":
+                UIMouse mouseTest = new UIMouse();
+                mouseTest.showUI();
+                break;
             // case "FONE DE OUVIDO":
             //     UIHeadset headsetTest = new UIHeadset();
             //     headsetTest.showUI();
