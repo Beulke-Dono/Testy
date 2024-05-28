@@ -2,8 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import hardware.SystemInfo;
 import ui.UIUtils;
+import ui.UICamera;
+import ui.UIHeadset;
 import ui.UIKeyboard;
 import ui.UIMouse;
+import ui.UISpeaker;
 public class Main {
     public static void main(String[] args) {
         // Configuração da Janela Principal
@@ -100,18 +103,18 @@ public class Main {
                 UIMouse mouseTest = new UIMouse();
                 mouseTest.showUI();
                 break;
-            // case "FONE DE OUVIDO":
-            //     UIHeadset headsetTest = new UIHeadset();
-            //     headsetTest.showUI();
-            //     break;
-            // case "CAIXA DE SOM":
-            //     UISpeaker speakerTest = new UISpeaker();
-            //     speakerTest.showUI();
-            //     break;
-            // case "WEBCAM":
-            //     UIWebcam webcamTest = new UIWebcam();
-            //     webcamTest.showUI();
-            //     break;
+            case "FONE DE OUVIDO":
+                UIHeadset headsetTest = new UIHeadset();
+                headsetTest.showUI();
+                break;
+            case "CAIXA DE SOM":
+                UISpeaker speakerTest = new UISpeaker();
+                speakerTest.showUI();
+                break;
+            case "WEBCAM":
+                UICamera webcamTest = new UICamera();
+                webcamTest.showUI();
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Teste não implementado para: " + testType, "Erro", JOptionPane.ERROR_MESSAGE);
                 break;
