@@ -100,16 +100,4 @@ public class UISpeaker {
     private void enableButtons() {
         speakerButton.setEnabled(true);
     }
-
-    /**
-     * Método principal para iniciar a aplicação.
-     *
-     * @param args Argumentos da linha de comando (não utilizados).
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            UISpeaker uiSpeakerTest = new UISpeaker();
-            uiSpeakerTest.showUI();
-        });
-    }
 }
