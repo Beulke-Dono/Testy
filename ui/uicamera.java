@@ -4,21 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Classe que representa uma interface gráfica para testar o funcionamento da webcam.
+ * A interface permite abrir o aplicativo de câmera do Windows através de um botão.
+ */
 public class UICamera {
-    private JFrame frame;
-    private JButton webcamButton;
-    private JLabel webcamStatusLabel;
+    private JFrame frame;  // Janela principal da aplicação
+    private JButton webcamButton;  // Botão para iniciar o teste da webcam
+    private JLabel webcamStatusLabel;  // Label que exibe o estado do teste da webcam
 
+    /**
+     * Construtor da classe UICamera.
+     * Inicializa a interface gráfica e configura o botão de teste da webcam.
+     */
     public UICamera() {
         frame = new JFrame("Teste de Webcam");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 200);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null);  // Centraliza a janela na tela
         frame.setLayout(new GridBagLayout());
         frame.getContentPane().setBackground(new Color(32, 31, 58));
 
         webcamButton = UIUtils.createButton("Testar Webcam");
-
         webcamButton.addActionListener(e -> testWebcam());
 
         webcamStatusLabel = new JLabel("Clique no botão para testar a webcam.", SwingConstants.CENTER);
@@ -39,10 +46,17 @@ public class UICamera {
         frame.add(webcamStatusLabel, gbc);
     }
 
+    /**
+     * Exibe a interface gráfica.
+     */
     public void showUI() {
         frame.setVisible(true);
     }
 
+    /**
+     * Testa a webcam abrindo o aplicativo de câmera do Windows.
+     * O botão é desativado durante a execução do teste.
+     */
     private void testWebcam() {
         disableButtons();
 
@@ -59,12 +73,29 @@ public class UICamera {
         enableButtons();
     }
 
+    /**
+     * Desabilita o botão de teste da webcam.
+     */
     private void disableButtons() {
         webcamButton.setEnabled(false);
     }
 
+    /**
+     * Habilita o botão de teste da webcam.
+     */
     private void enableButtons() {
         webcamButton.setEnabled(true);
     }
-}
 
+    /**
+     * Método principal para iniciar a aplicação.
+     *
+     * @param args Argumentos da linha de comando (não utilizados).
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            UICamera uiCameraTest = new UICamera();
+            uiCameraTest.showUI();
+        });
+    }
+}

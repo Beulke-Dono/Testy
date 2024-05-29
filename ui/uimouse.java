@@ -8,21 +8,31 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+/**
+ * Classe que representa uma interface gráfica para testar o funcionamento do mouse.
+ * A interface permite testar os botões, a rolagem e a movimentação do mouse.
+ */
 public class UIMouse {
-    private JFrame frame;
-    private MousePanel mousePanel;
-    private JLabel mouseLabel;
-    private JLabel scrollLabel;
-    private Point lastMousePosition;
+    private JFrame frame;  // Janela principal da aplicação
+    private MousePanel mousePanel;  // Painel personalizado para interações do mouse
+    private JLabel mouseLabel;  // Label que exibe a direção do movimento do mouse
+    private JLabel scrollLabel;  // Label que exibe a direção da rolagem do mouse
+    private Point lastMousePosition;  // Posição anterior do mouse para calcular a direção do movimento
 
+    /**
+     * Construtor da classe UIMouse.
+     * Inicializa a interface gráfica e configura os listeners de mouse.
+     */
     public UIMouse() {
         frame = new JFrame("Teste de Mouse");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        
+        frame.setLocationRelativeTo(null);  // Centraliza a janela na tela
+
         mousePanel = new MousePanel();
         mousePanel.setBackground(new Color(30, 30, 60));
+
+        // Adiciona um listener para cliques do mouse
         mousePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -31,6 +41,7 @@ public class UIMouse {
             }
         });
 
+        // Adiciona um listener para a rolagem do mouse
         mousePanel.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -38,6 +49,7 @@ public class UIMouse {
             }
         });
 
+        // Adiciona listeners para movimentação e arraste do mouse
         mousePanel.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -67,6 +79,11 @@ public class UIMouse {
         frame.add(labelPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Trata o clique dos botões do mouse.
+     *
+     * @param button o botão do mouse que foi clicado.
+     */
     private void handleMouseClick(int button) {
         switch (button) {
             case MouseEvent.BUTTON1: // Botão esquerdo
@@ -82,6 +99,11 @@ public class UIMouse {
         mousePanel.repaint();
     }
 
+    /**
+     * Trata a rolagem do mouse.
+     *
+     * @param e o evento de rolagem do mouse.
+     */
     private void handleMouseWheel(MouseWheelEvent e) {
         if (e.getWheelRotation() < 0) {
             mousePanel.setScrollDirection("UP");
@@ -91,6 +113,11 @@ public class UIMouse {
         updateScrollLabel();
     }
 
+    /**
+     * Trata o movimento do mouse.
+     *
+     * @param e o evento de movimento do mouse.
+     */
     private void handleMouseMovement(MouseEvent e) {
         if (lastMousePosition != null) {
             int dx = e.getX() - lastMousePosition.x;
@@ -113,24 +140,36 @@ public class UIMouse {
         updateMouseLabel();
     }
 
+    /**
+     * Atualiza o label de direção do movimento do mouse.
+     */
     private void updateMouseLabel() {
         mouseLabel.setText(String.format("Movimento do mouse: %s", mousePanel.getMouseDirection()));
     }
 
+    /**
+     * Atualiza o label de direção da rolagem do mouse.
+     */
     private void updateScrollLabel() {
         scrollLabel.setText(String.format("Rolagem: %s", mousePanel.getScrollDirection()));
     }
 
+    /**
+     * Exibe a interface gráfica.
+     */
     public void showUI() {
         frame.setVisible(true);
     }
 
+    /**
+     * Classe interna que representa um painel personalizado para as interações do mouse.
+     */
     class MousePanel extends JPanel {
-        private boolean leftButtonPressed = false;
-        private boolean middleButtonPressed = false;
-        private boolean rightButtonPressed = false;
-        private String scrollDirection = "";
-        private String mouseDirection = "";
+        private boolean leftButtonPressed = false;  // Flag para indicar se o botão esquerdo está pressionado
+        private boolean middleButtonPressed = false;  // Flag para indicar se o botão do meio está pressionado
+        private boolean rightButtonPressed = false;  // Flag para indicar se o botão direito está pressionado
+        private String scrollDirection = "";  // Direção da rolagem do mouse
+        private String mouseDirection = "";  // Direção do movimento do mouse
 
         public void setLeftButtonPressed(boolean pressed) {
             leftButtonPressed = pressed;
@@ -160,6 +199,11 @@ public class UIMouse {
             return mouseDirection;
         }
 
+        /**
+         * Sobrescreve o método paintComponent para desenhar os componentes gráficos do mouse.
+         *
+         * @param g o contexto gráfico.
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -182,7 +226,7 @@ public class UIMouse {
             g2.setColor(middleButtonPressed ? Color.GREEN : Color.BLACK);
             g2.fillRoundRect(235, 190, 30, 80, 10, 10);  // Scroll wheel
 
-            // Reset the button states
+            // Reseta os estados dos botões
             leftButtonPressed = false;
             middleButtonPressed = false;
             rightButtonPressed = false;

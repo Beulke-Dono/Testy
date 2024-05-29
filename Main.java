@@ -7,6 +7,7 @@ import ui.UIHeadset;
 import ui.UIKeyboard;
 import ui.UIMouse;
 import ui.UISpeaker;
+
 public class Main {
     public static void main(String[] args) {
         // Configuração da Janela Principal
@@ -32,7 +33,7 @@ public class Main {
         return frame;
     }
 
-    private static JPanel createInfoPanel() {
+    private static JPanel createInfoPanel() { // Usando static para função pertencer a classe
         JPanel infoPanel = UIUtils.createInfoPanel();
 
         // Obtendo e exibindo informações do Sistema Operacional
@@ -115,14 +116,14 @@ public class Main {
                 UICamera webcamTest = new UICamera();
                 webcamTest.showUI();
                 break;
-            default:
+            default: // JavaSwing: painel para teste não implementado
                 JOptionPane.showMessageDialog(null, "Teste não implementado para: " + testType, "Erro", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }
 
     private static void startDynamicUpdate(JLabel memoryLabel) {
-        Timer timer = new Timer(1000, e -> {
+        Timer timer = new Timer(1000, e -> { // Função lambda pro timer
             // Atualizar o JLabel com as informações de memória
             String memoryInfo = SystemInfo.getMemoryInfo();
             memoryLabel.setText("<html><div style='color: white;'>" + memoryInfo + "</div></html>");
