@@ -75,7 +75,7 @@ public class Main {
         JPanel buttonPanel = UIUtils.createButtonPanel();
 
         // Logo
-        ImageIcon logoIcon = new ImageIcon(new ImageIcon("images/robo.png").getImage().getScaledInstance(150, 80, Image.SCALE_SMOOTH));
+        ImageIcon logoIcon = new ImageIcon(new ImageIcon("images/robo.png").getImage().getScaledInstance(150, 75, Image.SCALE_SMOOTH));
         JLabel logoLabel = UIUtils.createLogoLabel(logoIcon);
         buttonPanel.add(logoLabel);
 
